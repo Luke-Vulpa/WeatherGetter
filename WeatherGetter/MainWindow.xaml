@@ -5,8 +5,111 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WeatherGetter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Weather Getter" Height="400" Width="576">
+
+
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Popup x:Name="AboutPopup" Placement="Center" >
+            <StackPanel HorizontalAlignment="Center" Background="White">
+                <TextBlock Padding="10" Margin="10" TextWrapping="Wrap" xml:space="preserve">
+                Thanks for checking out my project. Developed in c# - WPF, using postcode and datapoint API.
+                                    
+                Github: <Hyperlink NavigateUri="https://github.com/Luke-Vulpa/WeatherGetter" RequestNavigate="Hyperlink_RequestNavigate">Luke-Vulpa</Hyperlink>
+                Email: <Hyperlink NavigateUri="mailto:lukie@subvulpa.net?subject=Weather Getter Feedback" RequestNavigate="Hyperlink_RequestNavigate">Lukie@subvulpa.net</Hyperlink>
+                                
+                ©2019 Luke Desborough
+                </TextBlock>
+                <Button x:Name="PopupButton" Content="Okay" Width="120" Click="PopupButton_Click" Margin="20"></Button>
+            </StackPanel>
+        </Popup>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Help">
+                    <MenuItem Header="About..." Click="MenuItemAbout_Click" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Height="100" Margin="71,0" VerticalAlignment="Top">
+            <Label x:Name="Postcodelabel" Content="Postcode: " VerticalAlignment="Center" FontSize="18" Height="28" Margin="0,36" Width="97" Padding="1,1,1,0.7"/>
+            <TextBox x:Name="PostcodeTextBox" TextWrapping="Wrap" Text="" Width="163" VerticalAlignment="Center"  FontSize="18" Height="28" TextChanged="PostcodeTextBox_TextChanged" />
+            <Button x:Name="PostcodeButton" Content="Get Weather" Width="166" VerticalAlignment="Center"  FontSize="18" Background="#FF29E400" Foreground="White" Click="PostcodeButton_Click" />
+        </StackPanel>
         
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2">
+            <TextBlock x:Name="StatusTextBlock" TextWrapping="Wrap" Text="" Margin="20" FontSize="18" />
+        </StackPanel>
+
+        <Grid Name="ResultDataGrid" Grid.Column="1" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="155*" />
+                <ColumnDefinition Width="73*" />
+                <ColumnDefinition Width="113*" />
+                <ColumnDefinition Width="156*" />
+                <ColumnDefinition Width="71*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                
+            </Grid.RowDefinitions>
+            <Label x:Name="ForecastLabel" Content="Forecast" FontSize="20" FontWeight="Bold" Grid.Column="2" Grid.Row="0"  Grid.RowSpan="2"></Label>
+            <Label x:Name="DateLabel" Content="Date" FontSize="18" Grid.Column="0" Grid.Row="1" ></Label>
+            <Label x:Name="DateValueLabel" Content="" FontSize="18" Grid.Column="1" Grid.Row="1" ></Label>
+
+            <Label x:Name="DayLabel" Content="Day" FontSize="18" Grid.Column="0" Grid.Row="2"></Label>
+
+            <Label x:Name="DayWindSpeedLabel" Content="Wind Speed/Direction mph" Grid.Column="0" Grid.Row="3"></Label>
+            <Label x:Name="DayWindSpeedValueLabel" Content="" Grid.Column="1" Grid.Row="3"></Label>
+
+            <Label x:Name="DayPrecipitationLabel" Content="Chance of Precipitation" Grid.Column="0" Grid.Row="4"></Label>
+            <Label x:Name="DayPrecipitationValueLabel" Content="" Grid.Column="1" Grid.Row="4"></Label>
+
+            <Label x:Name="DayWeatherTypeLabel" Content="Weather Type" Grid.Column="0" Grid.Row="5"></Label>
+            <Label x:Name="DayWeatherTypeValueLabel" Content="" Grid.Column="1" Grid.Row="5"></Label>
+
+            <Label x:Name="DayTemperatureFeelsLikeLabel" Content="Temp Feels Like" Grid.Column="0" Grid.Row="6"></Label>
+            <Label x:Name="DayTemperatureFeelsLikeValueLabel" Content="" Grid.Column="1" Grid.Row="6"></Label>
+
+            <Label x:Name="NightLabel" Content="Night" FontSize="18" Grid.Column="3" Grid.Row="2"></Label>
+
+            <Label x:Name="NightWindSpeedLabel" Content="Wind Speed/Direction mph" Grid.Column="3" Grid.Row="3"></Label>
+            <Label x:Name="NightWindSpeedValueLabel" Content="" Grid.Column="4" Grid.Row="3"></Label>
+
+            <Label x:Name="NightPrecipitationLabel" Content="Chance of Precipitation" Grid.Column="3" Grid.Row="4"></Label>
+            <Label x:Name="NightPrecipitationValueLabel" Content="" Grid.Column="4" Grid.Row="4"></Label>
+
+            <Label x:Name="NightWeatherTypeLabel" Content="Weather Type" Grid.Column="3" Grid.Row="5"></Label>
+            <Label x:Name="NightWeatherTypeValueLabel" Content="" Grid.Column="4" Grid.Row="5"></Label>
+
+            <Label x:Name="NightTemperatureFeelsLikeLabel" Content="Temp Feels Like" Grid.Column="3" Grid.Row="6"></Label>
+            <Label x:Name="NightTemperatureFeelsLikeValueLabel" Content="" Grid.Column="4" Grid.Row="6"></Label>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal"  Grid.Column="1" Grid.Row="3">
+
+        </StackPanel>
+
+        <UniformGrid Name="SiteGrid" Grid.Column="1" Grid.Row="3">
+        </UniformGrid>
+        
+
+
     </Grid>
+    
 </Window>
