@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WeatherGetter.Models.LocationModels;
 using Newtonsoft.Json;
-using System.IO;
-using System.Reflection;
-using System.Resources;
 using WeatherGetter.Properties;
 
 namespace WeatherGetter.Services

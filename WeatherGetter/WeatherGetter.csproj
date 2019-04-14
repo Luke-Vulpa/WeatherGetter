@@ -65,10 +65,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\LocationModels\LocationAll.cs" />
-    <Compile Include="Models\LocationModels\Locations.cs" />
     <Compile Include="Models\LocationModels\RootObject.cs" />
     <Compile Include="Models\PostcodeModels\Codes.cs" />
-    <Compile Include="Models\LocationModels\Location.cs" />
     <Compile Include="Models\PostcodeModels\Result.cs" />
     <Compile Include="Models\PostcodeModels\RootObject.cs" />
     <Compile Include="Models\WeatherServiceModels\QuickType.cs" />

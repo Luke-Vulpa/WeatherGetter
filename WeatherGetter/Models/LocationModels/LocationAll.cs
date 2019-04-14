@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using Newtonsoft.Json;
@@ -31,8 +30,6 @@ namespace WeatherGetter.Models.LocationModels
 
         public partial class Location
         {
-            //[JsonProperty("elevation", NullValueHandling = NullValueHandling.Ignore)]
-            //public string Elevation { get; set; }
 
             [JsonProperty("id")]
             [JsonConverter(typeof(ParseStringConverter))]
@@ -47,17 +44,7 @@ namespace WeatherGetter.Models.LocationModels
             [JsonProperty("name")]
             public string Name { get; set; }
 
-            //[JsonProperty("region", NullValueHandling = NullValueHandling.Ignore)]
-            //public Region? Region { get; set; }
 
-            //[JsonProperty("unitaryAuthArea", NullValueHandling = NullValueHandling.Ignore)]
-            //public string UnitaryAuthArea { get; set; }
-
-            //[JsonProperty("obsSource", NullValueHandling = NullValueHandling.Ignore)]
-            //public ObsSource? ObsSource { get; set; }
-
-            //[JsonProperty("nationalPark", NullValueHandling = NullValueHandling.Ignore)]
-            //public NationalPark? NationalPark { get; set; }
         }
 
         public enum NationalPark { BreconBeaconsNationalPark, CairngormsNationalPark, DartmoorNationalPark, ExmoorNationalPark, LakeDistrictNationalPark, LochLomondAndTheTrossachsNationalPark, NewForestNationalPark, NorthYorkMoorsNationalPark, NorthumberlandNationalPark, PeakDistrictNationalPark, PembrokeshireCoastNationalPark, SnowdoniaNationalPark, SouthDownsNationalPark, TheBroads, TheMournes, YorkshireDalesNationalPark };
@@ -371,6 +358,3 @@ namespace WeatherGetter.Models.LocationModels
             public static readonly RegionConverter Singleton = new RegionConverter();
         }
     }
-
-
-
