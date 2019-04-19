@@ -55,8 +55,8 @@ namespace WeatherGetter.Services
 
                         return coordinate;
 
-                    }                                      
-
+                    }
+                    
                 }
                 catch(Exception ex)
                 {

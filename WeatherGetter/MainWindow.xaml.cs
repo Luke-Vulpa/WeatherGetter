@@ -16,6 +16,8 @@ namespace WeatherGetter
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+
         public static HttpClient Client;
         PostcodeService _postcode;
         WeatherService weatherService;
@@ -24,6 +26,8 @@ namespace WeatherGetter
         public MainWindow()
         {
             InitializeComponent();
+
+            PostcodeTextBox.Focus();
             Client = new HttpClient();
             ResultDataGrid.Visibility = Visibility.Hidden;
             SiteGrid.Visibility = Visibility.Hidden;
@@ -45,7 +49,7 @@ namespace WeatherGetter
                 
                 if(result == null)
                 {
-                    _updateStatus("Unknown postcode or service error");
+                    _updateStatus("Unknown postcode");
                 }
                 else
                 {
@@ -126,12 +130,18 @@ namespace WeatherGetter
             for (int i = 0; i < locations.Length - 1; i++)
             {
                 Button button = new Button();
-                button.Content = locations[i].Name.ToString();
+                button.Content = new TextBlock() {
+
+                    Text = locations[i].Name.ToString(),
+                    TextAlignment = TextAlignment.Center,
+                    TextWrapping = TextWrapping.WrapWithOverflow
+                };
 
                 // site Id is added to tag so weather service can reference
                 button.Tag = locations[i].Id.ToString();
                 button.Padding = new Thickness(5);
                 button.Margin = new Thickness(5);
+                
                 
 
                 button.Click += new RoutedEventHandler(_LocationButton_Click);
@@ -146,13 +156,19 @@ namespace WeatherGetter
 
         private async void _LocationButton_Click(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
-            
+            Button btn = sender as Button;            
             weatherService = new WeatherService(btn.Tag.ToString());
 
             await weatherService.getWeatherModelDataAsync();
 
-            _buildWeatherResultsUI(weatherService.SiteRep);
+            if (weatherService.SiteRep != null)
+            {
+                _buildWeatherResultsUI(weatherService.SiteRep);
+            }
+            else
+            {
+                _updateStatus("DataPoint service currently unavailable");
+            }
         }
 
         private void _buildWeatherResultsUI(SiteRep ws)
@@ -160,7 +176,7 @@ namespace WeatherGetter
             SiteGrid.Visibility = Visibility.Hidden;
             ResultDataGrid.Visibility = Visibility.Visible;
 
-            DateValueLabel.Content = ws.Dv.DataDate.Date.ToString();
+            DateValueLabel.Content = ws.Dv.DataDate.ToString("MM/dd/yyyy");
 
             //Day Values
 
@@ -210,16 +226,15 @@ namespace WeatherGetter
         private void MenuItemAbout_Click(object sender, RoutedEventArgs e)
         {
             AboutPopup.IsOpen = true;
+            PopupButton.Focus();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void PopupButton_Click(object sender, RoutedEventArgs e)
         {
             AboutPopup.IsOpen = false;
+            
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

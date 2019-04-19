@@ -50,6 +50,7 @@ namespace WeatherGetter.Services
                             decodeWeatherType(siteTemp.SiteRep.Dv.Location.Period[0].Rep[0].W);
                         siteTemp.SiteRep.Dv.Location.Period[0].Rep[1].W = 
                             decodeWeatherType(siteTemp.SiteRep.Dv.Location.Period[0].Rep[1].W);
+                        
 
 
                         this.SiteRep = siteTemp.SiteRep;
@@ -58,6 +59,15 @@ namespace WeatherGetter.Services
 
                         
 
+                    }
+                    else
+                    {
+                        if(_response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                        {
+                            this.SiteRep = null;
+
+                            return SiteRep;
+                        }
                     }
                 }
                 catch (Exception ex)
