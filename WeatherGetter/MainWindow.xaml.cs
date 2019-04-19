@@ -15,8 +15,7 @@ namespace WeatherGetter
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-        
+    {       
 
         public static HttpClient Client;
         PostcodeService _postcode;
@@ -38,9 +37,6 @@ namespace WeatherGetter
         {
             _clearStatus();
 
-            //debug
-            //SiteGrid.ShowGridLines = true;
-
             if (_validatePostcode())
             {
                 // get long lat from api
@@ -53,22 +49,12 @@ namespace WeatherGetter
                 }
                 else
                 {
-                    //do something with Coordinate result...
-                    // get sitelist iterate over list
-
+                    // pass postcode result into location service
                     var locationService = new LocationService(result);
-                    // if in range add to new list 
-                    //
-
-                    
+                                        
                     _buildLocationUI(locationService.ValidLocations);
 
-                    //ResultTextBlock.Text = locationService.ValidLocations[0].Name.ToString();
-                    //locationService.ValidLocations[0].Id.
                 }
-
-                
-
             }
         }
 
@@ -78,15 +64,15 @@ namespace WeatherGetter
         {
             _clearStatus();
             _validatePostcode();
+            
         }
 
         private void _updateStatus(string message)
         {
             StatusTextBlock.Text = message;
             StatusTextBlock.Foreground = Brushes.Tomato;
-            StatusTextBlock.UpdateLayout();        
+            StatusTextBlock.UpdateLayout();     
             
-
         }
 
         private void _clearStatus()
@@ -139,11 +125,10 @@ namespace WeatherGetter
 
                 // site Id is added to tag so weather service can reference
                 button.Tag = locations[i].Id.ToString();
-                button.Padding = new Thickness(5);
-                button.Margin = new Thickness(5);
-                
-                
 
+                button.Padding = new Thickness(5);
+                button.Margin = new Thickness(5);            
+                
                 button.Click += new RoutedEventHandler(_LocationButton_Click);
 
                 SiteGrid.Children.Add(button);
@@ -151,6 +136,7 @@ namespace WeatherGetter
             }
 
             SiteGrid.Visibility = Visibility.Visible;
+            
             
         }
 
@@ -167,29 +153,31 @@ namespace WeatherGetter
             }
             else
             {
-                _updateStatus("DataPoint service currently unavailable");
+                _updateStatus("DataPoint service currently unavailable try selecting a site again in a few moments");
             }
         }
 
         private void _buildWeatherResultsUI(SiteRep ws)
         {
+            
             SiteGrid.Visibility = Visibility.Hidden;
             ResultDataGrid.Visibility = Visibility.Visible;
 
             DateValueLabel.Content = ws.Dv.DataDate.ToString("MM/dd/yyyy");
 
             //Day Values
-
             DayWindSpeedValueLabel.Content = ws.Dv.Location.Period[0].Rep[0].S.ToString() + "/" + ws.Dv.Location.Period[0].Rep[0].D.ToString();
             DayPrecipitationValueLabel.Content = ws.Dv.Location.Period[0].Rep[0].PPd.ToString() + " %";
             DayWeatherTypeValueLabel.Content = ws.Dv.Location.Period[0].Rep[0].W.ToString();
             DayTemperatureFeelsLikeValueLabel.Content = ws.Dv.Location.Period[0].Rep[0].FDm.ToString() + "°C";
 
             //Night Values
-            NightWindSpeedValueLabel.Content = ws.Dv.Location.Period[0].Rep[1].S.ToString() + "/" + ws.Dv.Location.Period[0].Rep[1].D.ToString(); 
+            NightWindSpeedValueLabel.Content = ws.Dv.Location.Period[0].Rep[1].S.ToString() + "/" + ws.Dv.Location.Period[0].Rep[1].D.ToString();
             NightPrecipitationValueLabel.Content = ws.Dv.Location.Period[0].Rep[1].PPn.ToString() + " %";
             NightWeatherTypeValueLabel.Content = ws.Dv.Location.Period[0].Rep[1].W.ToString();
             NightTemperatureFeelsLikeValueLabel.Content = ws.Dv.Location.Period[0].Rep[1].FNm.ToString() + "°C";
+
+            StatusTextBlock.Text = "";
         }
 
         private void clearWeatherResults()
@@ -241,6 +229,17 @@ namespace WeatherGetter
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
+        }
+
+        private void PostcodeTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            
+
+            if (e.Key == System.Windows.Input.Key.Enter || e.Key == System.Windows.Input.Key.Return)
+            {
+                PostcodeButton_Click(sender, e);
+                
+            }
         }
     }
 }

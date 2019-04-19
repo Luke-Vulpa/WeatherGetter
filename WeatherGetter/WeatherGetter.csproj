@@ -112,7 +112,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Resource Include="Resources\sitelist2.json" />
-    <Resource Include="Resource\sitelist.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

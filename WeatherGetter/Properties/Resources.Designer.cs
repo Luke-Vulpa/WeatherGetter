@@ -85,40 +85,6 @@ namespace WeatherGetter.Properties {
         ///			{
         ///				&quot;elevation&quot;: &quot;25.0&quot;,
         ///				&quot;id&quot;: &quot;33&quot;,
-        ///				&quot;latitude&quot;: &quot;60.4322&quot;,
-        ///				&quot;lo [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string sitelist {
-            get {
-                return ResourceManager.GetString("sitelist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///	&quot;Locations&quot;: {
-        ///		&quot;Location&quot;: [
-        ///			{
-        ///				&quot;elevation&quot;: &quot;50.0&quot;,
-        ///				&quot;id&quot;: &quot;14&quot;,
-        ///				&quot;latitude&quot;: &quot;54.9375&quot;,
-        ///				&quot;longitude&quot;: &quot;-2.8092&quot;,
-        ///				&quot;name&quot;: &quot;Carlisle Airport&quot;,
-        ///				&quot;region&quot;: &quot;nw&quot;,
-        ///				&quot;unitaryAuthArea&quot;: &quot;Cumbria&quot;
-        ///			},
-        ///			{
-        ///				&quot;elevation&quot;: &quot;22.0&quot;,
-        ///				&quot;id&quot;: &quot;26&quot;,
-        ///				&quot;latitude&quot;: &quot;53.3336&quot;,
-        ///				&quot;longitude&quot;: &quot;-2.85&quot;,
-        ///				&quot;name&quot;: &quot;Liverpool John Lennon Airport&quot;,
-        ///				&quot;region&quot;: &quot;nw&quot;,
-        ///				&quot;unitaryAuthArea&quot;: &quot;Merseyside&quot;
-        ///			},
-        ///			{
-        ///				&quot;elevation&quot;: &quot;25.0&quot;,
-        ///				&quot;id&quot;: &quot;33&quot;,
         ///				&quot;latit [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sitelist2 {

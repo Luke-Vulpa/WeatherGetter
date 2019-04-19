@@ -118,10 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="sitelist" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resource\sitelist.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    <comment>Site lists used to gain location information of weather points</comment>
-  </data>
   <data name="sitelist2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sitelist2.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

@@ -21,7 +21,6 @@ namespace WeatherGetter.Services
             this._id = Id;
             SiteRep = new SiteRep();
 
-
         }
 
        public async Task<SiteRep> getWeatherModelDataAsync()
@@ -42,26 +41,23 @@ namespace WeatherGetter.Services
                     {
                         
                         var _result = await _response.Content.ReadAsStringAsync();
-
-
                         RootObject siteTemp = JsonConvert.DeserializeObject<RootObject>(_result);
 
                         siteTemp.SiteRep.Dv.Location.Period[0].Rep[0].W = 
                             decodeWeatherType(siteTemp.SiteRep.Dv.Location.Period[0].Rep[0].W);
+
                         siteTemp.SiteRep.Dv.Location.Period[0].Rep[1].W = 
-                            decodeWeatherType(siteTemp.SiteRep.Dv.Location.Period[0].Rep[1].W);
-                        
+                            decodeWeatherType(siteTemp.SiteRep.Dv.Location.Period[0].Rep[1].W);                       
 
 
                         this.SiteRep = siteTemp.SiteRep;
                         
                         return SiteRep;                       
 
-                        
-
                     }
                     else
                     {
+                        //Addresses occasional 403 issues
                         if(_response.StatusCode == System.Net.HttpStatusCode.Forbidden)
                         {
                             this.SiteRep = null;
@@ -81,7 +77,7 @@ namespace WeatherGetter.Services
 
        private string decodeWeatherType(string weatherType)
        {
-            
+            //decodes enumeration for weather type
             switch (weatherType)
             {
                 case "NA":
@@ -91,9 +87,9 @@ namespace WeatherGetter.Services
                 case "1":
                     return "Sunny day";
                 case "2":
-                    return "Partly cloudy(night)";
+                    return "Partly cloudy";
                 case "3":
-                    return "Partly cloudy(day)";
+                    return "Partly cloudy";
                 case "4":
                     return "Not used";
                 case "5":
@@ -105,47 +101,47 @@ namespace WeatherGetter.Services
                 case "8":
                     return "Overcast";
                 case "9":
-                    return "Light rain shower(night)";
+                    return "Light rain shower";
                 case "10":
-                    return "Light rain shower(day)";
+                    return "Light rain shower";
                 case "11":
                     return "Drizzle";
                 case "12":
                     return "Light rain";
                 case "13":
-                    return "Heavy rain shower(night)";
+                    return "Heavy rain shower";
                 case "14":
-                    return "Heavy rain shower(day)";
+                    return "Heavy rain shower";
                 case "15":
                     return "Heavy rain";
                 case "16":
-                    return "Sleet shower(night)";
+                    return "Sleet shower";
                 case "17":
-                    return "Sleet shower(day)";
+                    return "Sleet shower";
                 case "18":
                     return "Sleet";
                 case "19":
-                    return "Hail shower(night)";
+                    return "Hail shower";
                 case "20":
-                    return "Hail shower(day)";
+                    return "Hail shower";
                 case "21":
                     return "Hail";
                 case "22":
-                    return "Light snow shower(night)";
+                    return "Light snow shower";
                 case "23":
-                    return "Light snow shower(day)";
+                    return "Light snow shower";
                 case "24":
                     return "Light snow";
                 case "25":
-                    return "Heavy snow shower(night)";
+                    return "Heavy snow shower";
                 case "26":
-                    return "Heavy snow shower(day)";
+                    return "Heavy snow shower";
                 case "27":
                     return "Heavy snow";
                 case "28":
-                    return "Thunder shower(night)";
+                    return "Thunder shower";
                 case "29":
-                    return "Thunder shower(day)";
+                    return "Thunder shower";
                 case "30":
                     return "Thunder";
             }
@@ -153,10 +149,5 @@ namespace WeatherGetter.Services
             return "NA";
 
        }
-
-
-
-
-
     }
 }
